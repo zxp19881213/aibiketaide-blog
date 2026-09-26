@@ -1,0 +1,23 @@
+baseURL = 'https://aibiketaide.xyz/'
+languageCode = 'zh-cn'
+title = '爱比克泰德'
+theme = 'PaperMod'
+
+[params]
+  description = '技术、商业、读书与生活的记录'
+  author = '张学平'
+  defaultTheme = 'auto'
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  showtoc = true
+
+[menu]
+  [[menu.main]]
+    name = '文章'
+    url = '/posts/'
+    weight = 10
+  [[menu.main]]
+    name = '关于'
+    url = '/about/'
+    weight = 20
