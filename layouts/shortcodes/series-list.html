@@ -1,0 +1,13 @@
+{{- $name := .Get 0 -}}
+{{- $series := slice $name -}}
+{{- $all := where (where site.RegularPages "Section" "posts") "Params.series" "intersect" $series -}}
+{{- $sorted := sort $all "Date" "asc" -}}
+<div class="series-list">
+{{- range $i, $p := $sorted }}
+  <article style="margin:0 0 30px;">
+    <h3 style="margin:0 0 6px;"><a href="{{ $p.RelPermalink }}"><span style="color:var(--secondary); font-weight:400;">{{ add $i 1 }}.</span> {{ $p.Title }}</a></h3>
+    <div style="color:var(--secondary); font-size:.88em; margin-bottom:8px;">{{ $p.Date.Format "2006-01-02" }}</div>
+    <div style="margin:0;">{{ $p.Summary | plainify | truncate 200 }}</div>
+  </article>
+{{- end }}
+</div>
