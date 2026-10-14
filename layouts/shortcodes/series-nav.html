@@ -1,9 +1,9 @@
 {{- $series := .Page.Params.series -}}
 {{- if $series -}}
 {{- $name := index $series 0 -}}
-{{- $meta := index hugo.Data.series $name -}}
+{{- $meta := index .Site.Data.series $name -}}
 {{- if $meta -}}
-{{- $all := where (where site.RegularPages "Section" "posts") "Params.series" "intersect" $series -}}
+{{- $all := where (where .Site.RegularPages "Section" "posts") "Params.series" "intersect" $series -}}
 {{- $sorted := sort $all "Date" "asc" -}}
 {{- $idx := -1 -}}
 {{- range $i, $p := $sorted -}}
