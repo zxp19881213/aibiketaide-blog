@@ -1,6 +1,6 @@
 {{- $name := .Get 0 -}}
 {{- $series := slice $name -}}
-{{- $all := where (where site.RegularPages "Section" "posts") "Params.series" "intersect" $series -}}
+{{- $all := where (where .Site.RegularPages "Section" "posts") "Params.series" "intersect" $series -}}
 {{- $sorted := sort $all "Date" "asc" -}}
 <div class="series-list">
 {{- range $i, $p := $sorted }}
