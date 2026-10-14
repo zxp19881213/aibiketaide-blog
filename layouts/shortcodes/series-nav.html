@@ -1,0 +1,27 @@
+{{- $series := .Page.Params.series -}}
+{{- if $series -}}
+{{- $name := index $series 0 -}}
+{{- $meta := index hugo.Data.series $name -}}
+{{- if $meta -}}
+{{- $all := where (where site.RegularPages "Section" "posts") "Params.series" "intersect" $series -}}
+{{- $sorted := sort $all "Date" "asc" -}}
+{{- $idx := -1 -}}
+{{- range $i, $p := $sorted -}}
+{{- if eq $p.RelPermalink $.Page.RelPermalink -}}{{- $idx = $i -}}{{- end -}}
+{{- end -}}
+<div class="series-nav" style="border:1px solid var(--border); border-radius:8px; padding:14px 18px; margin:32px 0; background:var(--entry);">
+  <p style="margin:0 0 8px; font-weight:600;">📚 本篇收录于「<a href="/series/{{ $meta.slug }}/">{{ $name }}</a>」系列</p>
+  <p style="margin:0; color:var(--secondary); font-size:.92em;">
+    {{- if ge $idx 1 -}}
+      {{- $prev := index $sorted (sub $idx 1) -}}
+      上一篇：<a href="{{ $prev.RelPermalink }}">{{ $prev.Title }}</a>
+    {{- end -}}
+    {{- if and (ge $idx 1) (lt $idx (sub (len $sorted) 1)) }}<span style="margin:0 8px; color:var(--tertiary);">|</span>{{ end -}}
+    {{- if lt $idx (sub (len $sorted) 1) -}}
+      {{- $next := index $sorted (add $idx 1) -}}
+      下一篇：<a href="{{ $next.RelPermalink }}">{{ $next.Title }}</a>
+    {{- end -}}
+  </p>
+</div>
+{{- end -}}
+{{- end -}}
